@@ -3,4 +3,11 @@
     <string name="image_button">Choose Image</string>
     <string name="title_activity_image_play">Play with the Image</string>
     <string name="image_content">Selected Image</string>
+
+    <string name="introduction">
+        Welcome, user
+        \n\nWith this app you can argument your own photos. Please select some settings below and click the button at the bottom to get started.
+        \n\nThe settings here can be changed by coming back to this page.
+        \n\nEnjoy!
+    </string>
 </resources>

@@ -11,9 +11,11 @@ import android.widget.ImageView;
 
 public class PicturePlayer extends AppCompatActivity {
 
-    ImageView image;
     private static final int REQUEST_CODE = 1;
     private static final String TAG = "PicturePlayer";
+
+    ImageView image;
+    int undo_allowance;
 
 
     @Override
@@ -21,10 +23,13 @@ public class PicturePlayer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture);
 
-        Uri image_uri = getIntent().getData();
+        Intent i = getIntent();
+        Uri image_uri = i.getData();
+        undo_allowance = i.getIntExtra("undo_allowance", 1);
 
         image = (ImageView) findViewById(R.id.imageView);
         image.setImageURI(image_uri);
+        Log.d(TAG, "the undo allowance is: " + undo_allowance);
 
         Button first_button = (Button) findViewById(R.id.first_button);
         first_button.setOnClickListener(new View.OnClickListener() {
@@ -42,7 +47,7 @@ public class PicturePlayer extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d(TAG, "second_button pressed.");
                 image.clearColorFilter();
-                image.setColorFilter(R.color.colorAccent);
+                applyFilter();
             }
         });
 
@@ -57,4 +62,13 @@ public class PicturePlayer extends AppCompatActivity {
         });
 
     }
+
+    public void applyFilter() {
+        Log.d(TAG, "Apply filter");
+//        SharedPreferences pref = getPreferences(MODE_PRIVATE);
+//        Filter filter = new MedianFilter();
+//        BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
+//        (new FilterTask(filter, 1, image, this)).execute(drawable.getBitmap());
+    }
+
 }
