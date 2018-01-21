@@ -11,7 +11,7 @@ import android.widget.Button;
 public class PictureSelector extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 1;
-    private static final String TAG = "ImageSelector";
+    private static final String TAG = "PictureSelector";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
