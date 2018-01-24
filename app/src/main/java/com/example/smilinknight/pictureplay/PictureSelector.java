@@ -49,6 +49,19 @@ public class PictureSelector extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_CODE);
             }
         });
+
+        Button buttontake = (Button) findViewById(R.id.buttontake);
+        buttontake.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Picture taker button pressed.");
+//                intent.setAction(Intent.ACTION_GET_CONTENT);
+//                intent.setType("image/*");
+//                Log.d(TAG, "the undo allowance is: " + bundle.getInt("undo_allowance"));
+//                intent.putExtras(bundle);
+//                startActivityForResult(intent, REQUEST_CODE);
+            }
+        });
     }
 
     @Override
