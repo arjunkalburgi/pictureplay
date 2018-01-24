@@ -1,6 +1,7 @@
 package com.example.smilinknight.pictureplay;
 
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,7 +47,7 @@ public class PicturePlayer extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d(TAG, "second_button pressed.");
                 image.clearColorFilter();
-                applyFilter();
+                applyFilter(new NoiseReducer());
             }
         });
 
@@ -62,12 +63,12 @@ public class PicturePlayer extends AppCompatActivity {
 
     }
 
-    public void applyFilter() {
+    public void applyFilter(Filter filter) {
         Log.d(TAG, "Apply filter");
-//        SharedPreferences pref = getPreferences(MODE_PRIVATE);
-//        Filter filter = new MedianFilter();
-//        BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
-//        (new FilterTask(filter, 1, image, this)).execute(drawable.getBitmap());
+        BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
+        Log.d(TAG, image.toString());
+        (new PerformFilter(image, filter, image.getWidth(), this)).execute(drawable.getBitmap());
+        Log.d(TAG, image.toString());
     }
 
 }
