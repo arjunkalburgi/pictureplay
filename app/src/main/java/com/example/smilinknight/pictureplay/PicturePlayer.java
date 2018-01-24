@@ -25,10 +25,9 @@ public class PicturePlayer extends AppCompatActivity {
 
         Intent i = getIntent();
         Uri image_uri = i.getData();
-        undo_allowance = i.getIntExtra("undo_allowance", 1);
-
         image = (ImageView) findViewById(R.id.imageView);
         image.setImageURI(image_uri);
+        undo_allowance = i.getIntExtra("undo_allowance", 1);
         Log.d(TAG, "the undo allowance is: " + undo_allowance);
 
         Button first_button = (Button) findViewById(R.id.first_button);

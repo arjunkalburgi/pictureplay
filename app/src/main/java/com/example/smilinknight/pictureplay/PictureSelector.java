@@ -16,24 +16,14 @@ public class PictureSelector extends AppCompatActivity {
 
 
     Intent intent = new Intent();
-
+    Bundle bundle = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture_selector);
 
-        Button button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "Image selector button pressed.");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                Log.d(TAG, "the undo allowance is: " + intent.getIntExtra("undo_allowance", 0));
-                startActivityForResult(intent, REQUEST_CODE);
-            }
-        });
+        bundle.putString("test", "testing");
 
         NumberPicker np = (NumberPicker) findViewById(R.id.undonum);
         np.setMinValue(1);
@@ -43,10 +33,22 @@ public class PictureSelector extends AppCompatActivity {
         np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal){
-                intent.putExtra("undo_allowance", newVal);
+                bundle.putInt("undo_allowance", newVal);
             }
         });
 
+        Button button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Image selector button pressed.");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                Log.d(TAG, "the undo allowance is: " + bundle.getInt("undo_allowance"));
+                intent.putExtras(bundle);
+                startActivityForResult(intent, REQUEST_CODE);
+            }
+        });
     }
 
     @Override
