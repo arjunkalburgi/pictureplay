@@ -1,14 +1,10 @@
-package com.example.smilinknight.pictureplay;
+package com.example.smilinknight.pictureplay.filter;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.ImageView;
-
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Created by smilinknight on 2018-01-23.
@@ -20,13 +16,14 @@ public class PerformFilter extends AsyncTask<Bitmap, Integer, Bitmap> {
     private Filter filter;
     private int filterSize;
     private Context ctx;
+    public AsyncResponse delegate = null;
 
-    public PerformFilter(ImageView image, Filter filter, int size, Context context) {
+    public PerformFilter(ImageView image, Filter filter, AsyncResponse delegate, Context context) {
         super();
         this.image = image;
         this.filter = filter;
-        this.filterSize = size;
-        ctx = context;
+        this.ctx = context;
+        this.delegate = delegate;
     }
 
 
@@ -39,9 +36,9 @@ public class PerformFilter extends AsyncTask<Bitmap, Integer, Bitmap> {
     protected Bitmap doInBackground(Bitmap... params) {
         Bitmap image = params[0];
         Bitmap newMap = Bitmap.createBitmap(image.getWidth(), image.getHeight(), Bitmap.Config.ARGB_8888);
-        int[] pixels = new int[image.getWidth() * image.getHeight()];
+        int[] pixels = new int[image.getHeight() * image.getHeight()];
+        filterSize = image.getHeight();
 
-        // do something
 
         return newMap;
     }
@@ -54,7 +51,8 @@ public class PerformFilter extends AsyncTask<Bitmap, Integer, Bitmap> {
 
     @Override
     protected void onPostExecute(Bitmap newImage) {
-        image.setImageBitmap(newImage);
+        Log.d("PerformFilter", "do in background filter");
+        delegate.processFinish(newImage);
     }
 
 }

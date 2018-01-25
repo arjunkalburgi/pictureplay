@@ -1,6 +1,7 @@
-package com.example.smilinknight.pictureplay;
+package com.example.smilinknight.pictureplay.filter;
 
 import android.graphics.Color;
+import android.util.Log;
 
 /**
  * Created by smilinknight on 2018-01-24.

@@ -1,6 +1,7 @@
 package com.example.smilinknight.pictureplay;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.example.smilinknight.pictureplay.filter.AsyncResponse;
+import com.example.smilinknight.pictureplay.filter.Filter;
+import com.example.smilinknight.pictureplay.filter.PerformFilter;
+import com.example.smilinknight.pictureplay.filter.NoiseReducer;
 
 public class PicturePlayer extends AppCompatActivity {
 
@@ -57,7 +63,6 @@ public class PicturePlayer extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d(TAG, "third_button pressed.");
                 image.clearColorFilter();
-//                image.setColorFilter(R.color.colorAccent);
             }
         });
 
@@ -66,9 +71,13 @@ public class PicturePlayer extends AppCompatActivity {
     public void applyFilter(Filter filter) {
         Log.d(TAG, "Apply filter");
         BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
-        Log.d(TAG, image.toString());
-        (new PerformFilter(image, filter, image.getWidth(), this)).execute(drawable.getBitmap());
-        Log.d(TAG, image.toString());
+        (new PerformFilter(image, filter, new AsyncResponse() {
+                @Override
+                public void processFinish(Bitmap output) {
+//                    image.setImageBitmap(output);
+                    image.clearColorFilter();
+                }
+            }, this)).execute(drawable.getBitmap());
     }
 
 }

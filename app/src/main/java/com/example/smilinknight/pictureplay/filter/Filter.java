@@ -1,4 +1,4 @@
-package com.example.smilinknight.pictureplay;
+package com.example.smilinknight.pictureplay.filter;
 
 /**
  * Created by smilinknight on 2018-01-24.
