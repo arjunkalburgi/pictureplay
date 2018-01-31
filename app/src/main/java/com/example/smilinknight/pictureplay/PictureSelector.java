@@ -95,12 +95,14 @@ public class PictureSelector extends AppCompatActivity {
                 select_intent.setData(image);
                 select_intent.putExtras(bundle);
                 startActivity(select_intent);
+                break;
             case REQUEST_TAKE_PHOTO:
                 Intent capture_intent = new Intent();
                 capture_intent.setClass(this, PicturePlayer.class);
                 capture_intent.setData(Uri.parse("file:" + mCurrentPhotoPath));
                 capture_intent.putExtras(bundle);
                 startActivity(capture_intent);
+                break;
         }
     }
 
