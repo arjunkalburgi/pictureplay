@@ -1,9 +1,11 @@
 package com.example.smilinknight.pictureplay.filter;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by smilinknight on 2018-01-24.
  */
 
 public interface Filter {
-    int filter(int[] pixels);
+    Bitmap filter(Bitmap image, int h, int w);
 }

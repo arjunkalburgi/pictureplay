@@ -1,5 +1,6 @@
 package com.example.smilinknight.pictureplay.filter;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.util.Log;
 
@@ -9,19 +10,16 @@ import android.util.Log;
 
 public class NoiseReducer implements Filter {
 
-    public int filter(int[] pixels) {
-        int red = 0;
-        int green = 0;
-        int blue = 0;
-        int alpha = 0;
-        for(int i : pixels) {
-            alpha += Color.alpha(i);
-            blue += Color.blue(i);
-            green += Color.green(i);
-            red += Color.red(i);
-        }
-        return Color.argb(alpha/pixels.length, red/pixels.length, green/pixels.length, blue/pixels.length);
+    public Bitmap filter(Bitmap image, int h, int w) {
+        int pixel = image.getPixel(w, h);
+        int R = Color.red(pixel);
+        int G = Color.green(pixel);
+        int B = Color.blue(pixel);
+        if (R < 162 && G < 162 && B < 162)
+            image.setPixel(w, h, Color.BLACK);
+        else if (R > 162 && G > 162 && B > 162)
+            image.setPixel(w, h, Color.WHITE);
 
+        return image;
     }
-
 }

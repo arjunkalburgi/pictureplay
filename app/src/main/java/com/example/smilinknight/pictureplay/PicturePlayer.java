@@ -74,8 +74,7 @@ public class PicturePlayer extends AppCompatActivity {
         (new PerformFilter(image, filter, new AsyncResponse() {
                 @Override
                 public void processFinish(Bitmap output) {
-//                    image.setImageBitmap(output);
-                    image.clearColorFilter();
+                    image.setImageBitmap(output);
                 }
             }, this)).execute(drawable.getBitmap());
     }

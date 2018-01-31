@@ -35,10 +35,14 @@ public class PerformFilter extends AsyncTask<Bitmap, Integer, Bitmap> {
     @Override
     protected Bitmap doInBackground(Bitmap... params) {
         Bitmap image = params[0];
-        Bitmap newMap = Bitmap.createBitmap(image.getWidth(), image.getHeight(), Bitmap.Config.ARGB_8888);
-        int[] pixels = new int[image.getHeight() * image.getHeight()];
-        filterSize = image.getHeight();
+        Bitmap newMap = image.copy(Bitmap.Config.ARGB_8888, true);
+        newMap.setHasAlpha(true);
 
+        for (int h = 0; h < image.getHeight(); h++) {
+            for (int w=0; w<image.getWidth(); w++) {
+                newMap = filter.filter(newMap, h, w);
+            }
+        }
 
         return newMap;
     }
@@ -51,7 +55,7 @@ public class PerformFilter extends AsyncTask<Bitmap, Integer, Bitmap> {
 
     @Override
     protected void onPostExecute(Bitmap newImage) {
-        Log.d("PerformFilter", "do in background filter");
+        Log.d("PerformFilter", "did in background filter");
         delegate.processFinish(newImage);
     }
 
