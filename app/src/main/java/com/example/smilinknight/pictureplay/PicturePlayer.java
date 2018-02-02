@@ -57,6 +57,11 @@ public class PicturePlayer extends AppCompatActivity {
             }
 
             @Override
+            public void onSwipeUp() {
+                Toast.makeText(PicturePlayer.this, "This will zoom in.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
             public void onDoubleTap(MotionEvent e) {
                 Toast.makeText(PicturePlayer.this, "Wanna do swirl", Toast.LENGTH_SHORT).show();
                 applyFilter(new SwirlFilter());
