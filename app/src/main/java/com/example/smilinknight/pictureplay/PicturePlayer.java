@@ -59,39 +59,12 @@ public class PicturePlayer extends AppCompatActivity {
             @Override
             public void onDoubleTap(MotionEvent e) {
                 Toast.makeText(PicturePlayer.this, "Wanna do swirl", Toast.LENGTH_SHORT).show();
+                applyFilter(new SwirlFilter());
             }
 
             @Override
             public void onLongPress (MotionEvent event) {
                 Toast.makeText(PicturePlayer.this, "Wanna do fisheye", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        Button first_button = (Button) findViewById(R.id.first_button);
-        first_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "first_button pressed.");
-                applyFilter(new MedianFilter());
-            }
-        });
-
-        Button second_button = (Button) findViewById(R.id.second_button);
-        second_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "second_button pressed.");
-                applyFilter(new MeanFilter());
-            }
-        });
-
-        Button third_button = (Button) findViewById(R.id.third_button);
-        third_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "third_button pressed.");
-                image.clearColorFilter();
-                applyFilter(new SwirlFilter());
             }
         });
 
