@@ -18,10 +18,12 @@ import android.widget.Toast;
 
 import com.example.smilinknight.pictureplay.filter.AsyncResponse;
 import com.example.smilinknight.pictureplay.filter.Filter;
+import com.example.smilinknight.pictureplay.filter.FisheyeFilter;
 import com.example.smilinknight.pictureplay.filter.MedianFilter;
 import com.example.smilinknight.pictureplay.filter.PerformFilter;
 import com.example.smilinknight.pictureplay.filter.MeanFilter;
 import com.example.smilinknight.pictureplay.filter.SwirlFilter;
+import com.example.smilinknight.pictureplay.filter.ZoomFilter;
 import com.example.smilinknight.pictureplay.helpers.MegaGestureListener;
 
 public class PicturePlayer extends AppCompatActivity {
@@ -59,6 +61,7 @@ public class PicturePlayer extends AppCompatActivity {
             @Override
             public void onSwipeUp() {
                 Toast.makeText(PicturePlayer.this, "This will zoom in.", Toast.LENGTH_SHORT).show();
+                applyFilter(new ZoomFilter());
             }
 
             @Override
@@ -70,13 +73,14 @@ public class PicturePlayer extends AppCompatActivity {
             @Override
             public void onLongPress (MotionEvent event) {
                 Toast.makeText(PicturePlayer.this, "Wanna do fisheye", Toast.LENGTH_SHORT).show();
+                applyFilter(new FisheyeFilter());
             }
         });
 
     }
 
     public void applyFilter(Filter filter) {
-        Log.d(TAG, "Apply filter");
+        Log.d(TAG, "Apply filter " + filter.getClass().getName());
         BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
         (new PerformFilter(image, filter, new AsyncResponse() {
                 @Override

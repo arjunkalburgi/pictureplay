@@ -14,6 +14,10 @@ public class SwirlFilter implements Filter {
 
     public Bitmap filter(Bitmap original, Bitmap image) {
 
+        // This code originates from supercomputingblog.com
+        // credit goes to supercomputingblog.com
+        // http://supercomputingblog.com/openmp/image-twist-and-swirl-algorithm/
+
         double factor = 0.00005;
         double cX = original.getWidth()/2.0f;
         double cY = original.getHeight()/2.0f;
