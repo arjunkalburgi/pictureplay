@@ -60,6 +60,11 @@ public class PicturePlayer extends AppCompatActivity {
             public void onDoubleTap(MotionEvent e) {
                 Toast.makeText(PicturePlayer.this, "Wanna do swirl", Toast.LENGTH_SHORT).show();
             }
+
+            @Override
+            public void onLongPress (MotionEvent event) {
+                Toast.makeText(PicturePlayer.this, "Wanna do fisheye", Toast.LENGTH_SHORT).show();
+            }
         });
 
         Button first_button = (Button) findViewById(R.id.first_button);

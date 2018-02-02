@@ -77,8 +77,17 @@ public class MegaGestureListener implements View.OnTouchListener {
             }
             return result;
         }
+
+        @Override
+        public void onLongPress(MotionEvent e) {
+            MegaGestureListener.this.onLongPress(e);
+            super.onLongPress(e);
+        }
     }
 
+    public void onLongPress(MotionEvent e) {
+        // To be overridden when implementing listener
+    }
 
     public void onDoubleTap(MotionEvent e) {
         // To be overridden when implementing listener
