@@ -8,9 +8,13 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.smilinknight.pictureplay.filter.AsyncResponse;
 import com.example.smilinknight.pictureplay.filter.Filter;
@@ -18,6 +22,7 @@ import com.example.smilinknight.pictureplay.filter.MedianFilter;
 import com.example.smilinknight.pictureplay.filter.PerformFilter;
 import com.example.smilinknight.pictureplay.filter.MeanFilter;
 import com.example.smilinknight.pictureplay.filter.SwirlFilter;
+import com.example.smilinknight.pictureplay.helpers.MegaGestureListener;
 
 public class PicturePlayer extends AppCompatActivity {
 
@@ -39,6 +44,23 @@ public class PicturePlayer extends AppCompatActivity {
         image.setImageURI(image_uri);
         undo_allowance = i.getIntExtra("undo_allowance", 1);
         Log.d(TAG, "the undo allowance is: " + undo_allowance);
+
+        image.setOnTouchListener(new MegaGestureListener(this) {
+            @Override
+            public void onSwipeDown() {
+                Toast.makeText(PicturePlayer.this, "Down, this will save the image.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onSwipeRight() {
+                Toast.makeText(PicturePlayer.this, "This will make an undo.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onDoubleTap(MotionEvent e) {
+                Toast.makeText(PicturePlayer.this, "Wanna do swirl", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         Button first_button = (Button) findViewById(R.id.first_button);
         first_button.setOnClickListener(new View.OnClickListener() {
