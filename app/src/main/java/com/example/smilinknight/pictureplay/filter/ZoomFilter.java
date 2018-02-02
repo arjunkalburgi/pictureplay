@@ -23,7 +23,7 @@ public class ZoomFilter implements Filter {
         newImageWidth = (int) Math.floor(original.getWidth() * zoomLevel);
         newImageHeight = (int) Math.floor(original.getHeight() * zoomLevel);
         image = Bitmap.createBitmap(newImageWidth, newImageHeight, Bitmap.Config.ARGB_8888);
-        Log.d("ZoomFilter", "original: " + original.getWidth() + "\n image: " + image.getWidth());
+//        Log.d("ZoomFilter", "original: " + original.getWidth() + "\n image: " + image.getWidth());
 
         for (int w = 0; w < image.getWidth(); w++) {
             for (int h = 0; h < image.getHeight(); h++) {

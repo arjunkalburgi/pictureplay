@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -58,6 +59,8 @@ public class PicturePlayer extends AppCompatActivity {
             @Override
             public void onSwipeDown() {
                 Toast.makeText(PicturePlayer.this, "Saving image...", Toast.LENGTH_SHORT).show();
+                image.setDrawingCacheEnabled(true);
+                MediaStore.Images.Media.insertImage(PicturePlayerContext.getContentResolver(), image.getDrawingCache(), "PICTUREPLAYER", "madebypictureplayer");
             }
 
             @Override
