@@ -7,5 +7,5 @@ import android.graphics.Bitmap;
  */
 
 public interface Filter {
-    Bitmap filter(Bitmap image, int h, int w);
+    Bitmap filter(Bitmap original, Bitmap image);
 }

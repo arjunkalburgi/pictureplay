@@ -14,7 +14,6 @@ public class PerformFilter extends AsyncTask<Bitmap, Integer, Bitmap> {
 
     private ImageView image;
     private Filter filter;
-    private int filterSize;
     private Context ctx;
     public AsyncResponse delegate = null;
 
@@ -38,11 +37,7 @@ public class PerformFilter extends AsyncTask<Bitmap, Integer, Bitmap> {
         Bitmap newMap = image.copy(Bitmap.Config.ARGB_8888, true);
         newMap.setHasAlpha(true);
 
-        for (int h = 0; h < image.getHeight(); h++) {
-            for (int w=0; w<image.getWidth(); w++) {
-                newMap = filter.filter(newMap, h, w);
-            }
-        }
+        newMap = filter.filter(image, newMap);
 
         return newMap;
     }

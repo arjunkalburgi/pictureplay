@@ -1,5 +1,6 @@
 package com.example.smilinknight.pictureplay;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -13,12 +14,14 @@ import android.widget.ImageView;
 
 import com.example.smilinknight.pictureplay.filter.AsyncResponse;
 import com.example.smilinknight.pictureplay.filter.Filter;
+import com.example.smilinknight.pictureplay.filter.MedianFilter;
 import com.example.smilinknight.pictureplay.filter.PerformFilter;
-import com.example.smilinknight.pictureplay.filter.NoiseReducer;
+import com.example.smilinknight.pictureplay.filter.MeanFilter;
+import com.example.smilinknight.pictureplay.filter.SwirlFilter;
 
 public class PicturePlayer extends AppCompatActivity {
 
-    private static final int REQUEST_CODE = 1;
+    Context PicturePlayerContext = this;
     private static final String TAG = "PicturePlayer";
 
     ImageView image;
@@ -42,8 +45,7 @@ public class PicturePlayer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "first_button pressed.");
-                image.clearColorFilter();
-                image.setColorFilter(R.color.colorPrimary);
+                applyFilter(new MedianFilter());
             }
         });
 
@@ -52,8 +54,7 @@ public class PicturePlayer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "second_button pressed.");
-                image.clearColorFilter();
-                applyFilter(new NoiseReducer());
+                applyFilter(new MeanFilter());
             }
         });
 
@@ -63,6 +64,7 @@ public class PicturePlayer extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d(TAG, "third_button pressed.");
                 image.clearColorFilter();
+                applyFilter(new SwirlFilter());
             }
         });
 
