@@ -13,13 +13,13 @@ public class FisheyeFilter implements Filter {
         // for each row
         for (int y=0;y<original.getHeight();y++) {
             // normalize y coordinate to -1 ... 1
-            double ny = ((2*y)/original.getHeight())-1;
+            double ny = ((2.0*y)/original.getHeight())-1;
             // pre calculate ny*ny
             double ny2 = ny*ny;
             // for each column
             for (int x=0;x<original.getWidth();x++) {
                 // normalize x coordinate to -1 ... 1
-                double nx = ((2*x)/original.getWidth())-1;
+                double nx = ((2.0*x)/original.getWidth())-1;
                 // pre calculate nx*nx
                 double nx2 = nx*nx;
                 // calculate distance from center (0,0)
