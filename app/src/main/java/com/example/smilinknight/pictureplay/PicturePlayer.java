@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -56,12 +58,6 @@ public class PicturePlayer extends AppCompatActivity {
         Log.d(TAG, "the undo allowance is: " + undo_allowance);
 
         image.setOnTouchListener(new MegaGestureListener(this) {
-            @Override
-            public void onSwipeDown() {
-                Toast.makeText(PicturePlayer.this, "Saving image...", Toast.LENGTH_SHORT).show();
-                image.setDrawingCacheEnabled(true);
-                MediaStore.Images.Media.insertImage(PicturePlayerContext.getContentResolver(), image.getDrawingCache(), "PICTUREPLAYER", "madebypictureplayer");
-            }
 
             @Override
             public void onSwipeRight() {
@@ -74,9 +70,15 @@ public class PicturePlayer extends AppCompatActivity {
             }
 
             @Override
+            public void onSwipeDown() {
+                Toast.makeText(PicturePlayer.this, "Calculating Median of Pixels...", Toast.LENGTH_SHORT).show();
+                applyFilter(new MedianFilter());
+            }
+
+            @Override
             public void onSwipeUp() {
-                Toast.makeText(PicturePlayer.this, "Zooming...", Toast.LENGTH_SHORT).show();
-                applyFilter(new ZoomFilter());
+                Toast.makeText(PicturePlayer.this, "Calculating Mean of Pixels...", Toast.LENGTH_SHORT).show();
+                applyFilter(new MeanFilter());
             }
 
             @Override
@@ -91,6 +93,18 @@ public class PicturePlayer extends AppCompatActivity {
                 applyFilter(new FisheyeFilter());
             }
         });
+
+        Button save = (Button) findViewById(R.id.savebutton);
+        save.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Log.d(TAG, "save button pressed.");
+                 Toast.makeText(PicturePlayer.this, "Saving image...", Toast.LENGTH_SHORT).show();
+                 image.setDrawingCacheEnabled(true);
+                 MediaStore.Images.Media.insertImage(PicturePlayerContext.getContentResolver(), image.getDrawingCache(), "PICTUREPLAYER", "madebypictureplayer");
+            }
+         });
+
 
     }
 

@@ -45,6 +45,7 @@
                 android:id="@+id/button"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_margin="10px"
                 android:layout_weight="1"
                 android:text="@string/image_button"
                 android:background="@drawable/button_style"/>
@@ -52,6 +53,7 @@
             <Button
                 android:id="@+id/buttontake"
                 android:layout_width="0dp"
+                android:layout_margin="10px"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Take Picture"

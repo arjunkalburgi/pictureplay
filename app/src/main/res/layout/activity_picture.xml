@@ -23,13 +23,26 @@
             android:layout_alignParentBottom="true">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Swipe down to save, swipe right to undo. press and hold to fisheye, double tap to swirl, pinch to zoom."
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:layout_margin="10px"
+                android:paddingLeft="20px"
+                android:text="Swipe right to undo. press and hold to fisheye, double tap to swirl. Up for mean filter, down for median filter."
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+            
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="10px"
+                android:id="@+id/savebutton"
+                android:text="Save"
+                android:background="@drawable/button_style"/>
+
         </LinearLayout>
     </RelativeLayout>
 
