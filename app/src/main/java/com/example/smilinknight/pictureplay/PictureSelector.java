@@ -12,7 +12,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
@@ -27,7 +26,6 @@ public class PictureSelector extends AppCompatActivity {
     String mCurrentPhotoPath;
     static final int REQUEST_TAKE_PHOTO = 1;
     private static final int REQUEST_IMAGE_PICKER = 2;
-    private static final String TAG = "PictureSelector";
 
     Bundle bundle = new Bundle();
     Context PictureSelectorContext = this;
@@ -36,8 +34,6 @@ public class PictureSelector extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture_selector);
-
-        bundle.putString("test", "testing");
 
         NumberPicker np = (NumberPicker) findViewById(R.id.undonum);
         np.setMinValue(1);
@@ -51,21 +47,18 @@ public class PictureSelector extends AppCompatActivity {
             }
         });
 
-        Button button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button select_button = (Button) findViewById(R.id.button);
+        select_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "Image selector button pressed.");
                 dispatchPickPictureIntent();
             }
         });
 
-        Button buttontake = (Button) findViewById(R.id.buttontake);
-        buttontake.setOnClickListener(new View.OnClickListener() {
+        Button take_button = (Button) findViewById(R.id.buttontake);
+        take_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "Picture taker button pressed.");
-                Log.d(TAG, "the undo allowance is: " + bundle.getInt("undo_allowance") + ". CAMERA TIME");
                 if (ContextCompat.checkSelfPermission(PictureSelectorContext, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                     dispatchTakePictureIntent();
                 } else {
@@ -79,7 +72,6 @@ public class PictureSelector extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "Image selection returned");
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode != RESULT_OK) {
             return;
@@ -88,8 +80,6 @@ public class PictureSelector extends AppCompatActivity {
         switch (requestCode) {
             case REQUEST_IMAGE_PICKER:
                 Uri image = data.getData();
-                Log.d(TAG, "Image at " + image.toString() + " chosen");
-                Log.d(TAG, "Passing image to next activity");
                 Intent select_intent = new Intent();
                 select_intent.setClass(this, PicturePlayer.class);
                 select_intent.setData(image);
@@ -145,7 +135,6 @@ public class PictureSelector extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
-        Log.d(TAG, "the undo allowance is: " + bundle.getInt("undo_allowance") + ". PHOTO TIME");
         startActivityForResult(intent, REQUEST_IMAGE_PICKER);
     }
 }
